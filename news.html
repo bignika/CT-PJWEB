@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/tcico.ico">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>ประกาศข่าวมหาวิทยาลัย</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .content {
+            flex: 1;
+            padding-bottom: 80px;
+        }
+
+        footer {
+            background-color: #004080;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+        }
+
+        header img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            color: white;
+        }
+
+        .open-btn {
+            cursor: pointer;
+            background-color: #004080;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin-left: auto;
+        }
+
+        .open-btn:hover {
+            background-color: transparent;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        .slider {
+            max-width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            object-fit: scale-down;
+            border-radius: 10px;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-500%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+            border-radius: 10%;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .news-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-title {
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        .news-date {
+            font-size: 14px;
+            color: #95a5a6;
+        }
+
+        .news-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #7f8c8d;
+        }
+
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="/img/tcico.png" alt="TCI Co Logo">
+        <img src="/img/udtcico.png" alt="UDT Co Logo">
+        <h1>โครงการนักเรียน / นักศึกษาสาขาเทคโนโลยีคอมพิวเตอร์</h1>
+        <button class="open-btn" onclick="openNav()" aria-label="Open Side Navigation">&#9776; เมนู</button>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/page2.html">ผลงาน ปวช2</a>
+            <a href="/page1.html">ผลงาน ปวส2</a>
+            <a href="/team.html">ครูที่ปรึกษา</a>
+            <a href="/news.html">ประกาศ</a>
+        </div>
+    </header>
+
+    <div id="main" class="content">
+        <div class="container">
+            <h1 style="color: black; font-weight: bold; text-align: center;">ประกาศข่าวมหาวิทยาลัย</h1>
+
+
+            <!-- Image Slider Section -->
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide">
+                        <img src="/img/cat1.jpg" alt="ข่าวที่ 1">
+                    </div>
+                    <div class="slide">
+                        <img src="/img/cat2.jpg" alt="ข่าวที่ 2">
+                    </div>
+                    <div class="slide">
+                        <img src="/img/cat3.jpg" alt="ข่าวที่ 3">
+                    </div>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+
+            <!-- News Items -->
+            <div class="news-item">
+                <h2 class="news-title">เปิดรับสมัครนักศึกษาใหม่ ปีการศึกษา 2567</h2>
+                <p class="news-date">วันที่ประกาศ: 9 พฤศจิกายน 2567</p>
+                <p class="news-content">มหาวิทยาลัยขอเชิญชวนผู้สนใจสมัครเข้าเรียนในปีการศึกษา 2567
+                    โดยสามารถยื่นใบสมัครได้ตั้งแต่วันนี้จนถึงวันที่ 30 ธันวาคม 2567
+                    ผ่านระบบออนไลน์ที่เว็บไซต์ของมหาวิทยาลัย.</p>
+                <a href="#" class="btn">อ่านรายละเอียดเพิ่มเติม</a>
+            </div>
+
+            <div class="news-item">
+                <h2 class="news-title">กิจกรรมอบรมการใช้ห้องสมุดออนไลน์</h2>
+                <p class="news-date">วันที่ประกาศ: 8 พฤศจิกายน 2567</p>
+                <p class="news-content">สำหรับนักศึกษาใหม่ทุกท่าน
+                    มหาวิทยาลัยจัดกิจกรรมอบรมการใช้ห้องสมุดออนไลน์เพื่อให้สามารถเข้าถึงข้อมูลการเรียนการสอนได้สะดวกยิ่งขึ้น
+                    กำหนดการอบรมจะมีในวันที่ 15 พฤศจิกายน 2567.</p>
+                <a href="#" class="btn">ลงทะเบียนเข้าร่วม</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 จัดทำโดย นึกศึกษาสาขาวิชา เทคโนโลยีคอมพิวเตอร์.</p>
+    </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+
+        function showSlide(index) {
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(-${slideIndex * 100}%)`; // Move to the correct slide
+            });
+        }
+        prevButton.addEventListener('click', () => {
+            slideIndex--;
+            showSlide(slideIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            slideIndex++;
+            showSlide(slideIndex);
+        });
+
+        document.addEventListener('click', function (event) {
+            const sidenav = document.getElementById('mySidenav');
+            const mainContent = document.getElementById('main');
+
+            if (sidenav.style.width === '250px' && !sidenav.contains(event.target) && !event.target.classList.contains('open-btn')) {
+                closeNav();
+            }
+        });
+
+        showSlide(slideIndex);
+
+        setInterval(() => {
+            slideIndex++;
+            showSlide(slideIndex);
+        }, 5000);
+    </script>
+</body>
+
+</html>

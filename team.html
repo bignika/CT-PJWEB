@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/tcico.ico">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>ประกาศข่าวมหาวิทยาลัย</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .content {
+            flex: 1;
+            padding-bottom: 80px;
+        }
+
+        footer {
+            background-color: #004080;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+        }
+
+        header img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            color: white;
+        }
+
+        .open-btn {
+            cursor: pointer;
+            background-color: #004080;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin-left: auto;
+        }
+
+        .open-btn:hover {
+            background-color: transparent;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        .slider {
+            max-width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            object-fit: scale-down;
+            border-radius: 10px;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-500%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+            border-radius: 10%;
+        }
+
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+
+
+
+        @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+        #team {
+            background: #eee !important;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #108d6f;
+            border-color: #108d6f;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007b5e;
+            border-color: #007b5e;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        section .section-title {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        #team .card {
+            border: none;
+            background: #ffffff;
+        }
+
+        .image-flip:hover .backside,
+        .image-flip.hover .backside {
+            -webkit-transform: rotateY(0deg);
+            -moz-transform: rotateY(0deg);
+            -o-transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+            border-radius: .25rem;
+        }
+
+        .image-flip:hover .frontside,
+        .image-flip.hover .frontside {
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+
+        .mainflip {
+            -webkit-transition: 1s;
+            -webkit-transform-style: preserve-3d;
+            -ms-transition: 1s;
+            -moz-transition: 1s;
+            -moz-transform: perspective(1000px);
+            -moz-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transition: 1s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .frontside {
+            position: relative;
+            -webkit-transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg);
+            z-index: 2;
+            margin-bottom: 30px;
+        }
+
+        .backside {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            -webkit-transform: rotateY(-180deg);
+            -moz-transform: rotateY(-180deg);
+            -o-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+            -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+            -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+            box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+        }
+
+        .frontside,
+        .backside {
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transition: 1s;
+            -webkit-transform-style: preserve-3d;
+            -moz-transition: 1s;
+            -moz-transform-style: preserve-3d;
+            -o-transition: 1s;
+            -o-transform-style: preserve-3d;
+            -ms-transition: 1s;
+            -ms-transform-style: preserve-3d;
+            transition: 1s;
+            transform-style: preserve-3d;
+        }
+
+        .frontside .card,
+        .backside .card {
+            min-height: 312px;
+        }
+
+        .backside .card a {
+            font-size: 18px;
+            color: #000000 !important;
+        }
+
+        .frontside .card .card-title,
+        .backside .card .card-title {
+            color: #000000 !important;
+        }
+
+        .frontside .card .card-body img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+        }
+
+        .small-title {
+            font-size: 18px;
+        }
+
+        .card-body img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="/img/tcico.png" alt="TCI Co Logo">
+        <img src="/img/udtcico.png" alt="UDT Co Logo">
+        <h1>โครงการนักเรียน / นักศึกษาสาขาเทคโนโลยีคอมพิวเตอร์</h1>
+        <button class="open-btn" onclick="openNav()" aria-label="Open Side Navigation">&#9776; เมนู</button>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/page2.html">ผลงาน ปวช2</a>
+            <a href="/page1.html">ผลงาน ปวส2</a>
+            <a href="/team.html">ครูที่ปรึกษา</a>
+            <a href="/news.html">ประกาศ</a>
+        </div>
+    </header>
+
+    <section id="main" class="pb-5">
+        <div class="container">
+            <h5 class="section-title h1">ครูที่ปรึกษาวิชาโครงการ</h5>
+            <div class="row">
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip">
+                        <div class="mainflip flip-0">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class="img-fluid rounded-circle" src="/img/IMG_8609.JPG"
+                                                alt="card image"></p>
+                                        <h4 class="card-title small-title">กัญญาภัค เหล่าทนนท์</h4>
+                                        <p class="card-text">ตำแหน่ง ครูผู้จริงจัง</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">Garhpic Illustrator</h4>
+                                        <p class="card-text">ให้คำปรึกษาเกี่ยวกับกราฟฟิก เรื่องการใช้สี การสร้าง Vector
+                                            และ Motion ต่างๆ รวมถึง Tips ในการถ่ายรูป
+                                        </p>
+                                        <!-- Social Media Icons using Bootstrap Icons -->
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.facebook.com/username">
+                                                    <i class="bi bi-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.instagram.com/username">
+                                                    <i class="bi bi-instagram"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.twitter.com/username">
+                                                    <i class="bi bi-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://line.me/R/ti/p/%40username">
+                                                    <i class="bi bi-chat-left-dots"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        </a>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip">
+                        <div class="mainflip flip-0">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class="img-fluid" src="/img/studentImageReq.jfif" alt="card image"></p>
+                                        <h4 class="card-title small-title">ธนาธิป บุญเพ็ง</h4>
+                                        <p class="card-text">ตำแหน่ง ครูผู้ฮาทุกเรื่อง</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">ความฮาไร้ขีดจำกัด</h4>
+                                        <p class="card-text">เน้นสร้างเสียงหัวเราะและความน่ารำคาญ
+                                        </p>
+                                        <!-- Social Media Icons using Bootstrap Icons -->
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.facebook.com/username">
+                                                    <i class="bi bi-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.instagram.com/username">
+                                                    <i class="bi bi-instagram"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.twitter.com/username">
+                                                    <i class="bi bi-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://line.me/R/ti/p/%40username">
+                                                    <i class="bi bi-chat-left-dots"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip">
+                        <div class="mainflip flip-0">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class="img-fluid" src="/img/itkung.jpg" alt="card image"></p>
+                                        <h4 class="card-title small-title">ณัฐยศ หนูมอ</h4>
+                                        <p class="card-text">ตำแหน่ง ครูผู้ช่วยทำอะไร</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">ทำไมไม่ใช้ C# ?</h4>
+                                        <p class="card-text">เน้นฟังไม่เน้นคุย คุยได้แต่ไม่รู้เรื่อง
+                                        </p>
+                                        <!-- Social Media Icons using Bootstrap Icons -->
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.facebook.com/username">
+                                                    <i class="bi bi-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.instagram.com/username">
+                                                    <i class="bi bi-instagram"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.twitter.com/username">
+                                                    <i class="bi bi-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://line.me/R/ti/p/%40username">
+                                                    <i class="bi bi-chat-left-dots"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip">
+                        <div class="mainflip flip-0">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class="img-fluid" src="/img/robloxman.jpg" alt="card image"></p>
+                                        <h4 class="card-title small-title">วายุ ผิวผ่อง</h4>
+                                        <p class="card-text">ว่าที่ ครูคนใหม่</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">เขาคือ Mr.Roblox</h4>
+                                        <p class="card-text">ศาสตร์ด้านการเต้น และความคิดสร้างสรรค์แบบที่ไม่เคยมีมาก่อน
+                                        </p>
+                                        <!-- Social Media Icons using Bootstrap Icons -->
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.facebook.com/username">
+                                                    <i class="bi bi-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.instagram.com/username">
+                                                    <i class="bi bi-instagram"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.twitter.com/username">
+                                                    <i class="bi bi-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://line.me/R/ti/p/%40username">
+                                                    <i class="bi bi-chat-left-dots"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip">
+                        <div class="mainflip flip-0">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class="img-fluid" src="#" alt="card image"></p>
+                                        <h4 class="card-title small-title">id_name</h4>
+                                        <p class="card-text">pos_id</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">text_text</h4>
+                                        <p class="card-text">_text_
+                                        </p>
+                                        <!-- Social Media Icons using Bootstrap Icons -->
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.facebook.com/username">
+                                                    <i class="bi bi-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.instagram.com/username">
+                                                    <i class="bi bi-instagram"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://www.twitter.com/username">
+                                                    <i class="bi bi-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank"
+                                                    href="https://line.me/R/ti/p/%40username">
+                                                    <i class="bi bi-chat-left-dots"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        </div>
+
+
+    </section>
+
+    <footer>
+        <p>&copy; 2024 จัดทำโดย นักศึกษาสาขาวิชา เทคโนโลยีคอมพิวเตอร์.</p>
+    </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+
+        function showSlide(index) {
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+            });
+        }
+
+        if (prevButton && nextButton) {
+            prevButton.addEventListener('click', () => {
+                slideIndex--;
+                showSlide(slideIndex);
+            });
+
+            nextButton.addEventListener('click', () => {
+                slideIndex++;
+                showSlide(slideIndex);
+            });
+        }
+
+        document.addEventListener('click', function (event) {
+            const sidenav = document.getElementById('mySidenav');
+
+            if (sidenav.style.width === '250px' && !sidenav.contains(event.target) && !event.target.classList.contains('open-btn')) {
+                closeNav();
+            }
+        });
+
+        showSlide(slideIndex);
+
+        setInterval(() => {
+            slideIndex++;
+            showSlide(slideIndex);
+        }, 5000);
+    </script>
+</body>
+
+</html>
